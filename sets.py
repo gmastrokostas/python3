@@ -53,7 +53,6 @@ list_1=['One', 'Two', 'One']
 list_1=list(set(list_1))
 print(list_1)
 
-
 Remove and add value from a set
 set_1={'One', 'Two', 'Three'}
 set_1.discard('One')
