@@ -45,4 +45,25 @@ Demonstrating a Difference
 Demonstrating a Symmetric Difference
 {'Cat', 'Dog'}
 
+#####################################################################
+Various Set examples
+
+Remove duplicates from a list using a set
+list_1=['One', 'Two', 'One']
+list_1=list(set(list_1))
+print(list_1)
+
+
+Remove and add value from a set
+set_1={'One', 'Two', 'Three'}
+set_1.discard('One')
+set_1.add('One')
+
+Sort the values in a set
+set_1={'A', 'B', 'C', 'D', 'E', 'F', 'G'}
+print(sorted(set_1))
+
+
+
+
 
