@@ -1,0 +1,34 @@
+---
+- hosts: centos1
+  become: True
+  become_method: sudo
+  become_user: root
+  remote_user: ansible
+  vars:
+   - loop_number: 10
+
+  tasks:
+  - name: create groups
+    group:
+      name: "{{ item.groups }}"
+      state: present
+    loop: "{{ users }}"
+
+  - name: printing
+    debug:
+      msg: "{{item.username}}"
+    loop: "{{users}}"
+
+  - name: printing_2
+    debug:
+      msg: "{{item.ip_addy}}"
+    loop: "{{set_up}}"
+
+  - name: printing_3
+    debug:
+      msg: "{{dns_setup}}"
+
+  - name: template
+    template:
+      src: counter.j2
+      dest: /var/tmp/counter

@@ -1,0 +1,239 @@
+---
+- hosts: all
+  become: True
+  become_method: sudo
+  become_user: root
+
+  vars:
+
+    - rpm_dir: /var/tmp/cve2021-3156
+#RH6
+    - sudo_rh_6:   sudo-1.8.6p3-29.el6_10.4.x86_64.rpm
+    - sudo_rh_6v:  sudo-1.8.6p3-29.el6_10.4.x86_64
+#RH7
+    - sudo_rh_79:  sudo-1.8.23-10.el7_9.1.x86_64.rpm
+    - sudo_rh_79v: sudo-1.8.23-10.el7_9.1.x86_64
+#RH7.2
+    - sudo_rh_72: sudo-1.8.6p7-17.el7_2.x86_64.rpm
+    - sudo_rh_72v: sudo-1.8.6p7-17.el7_2.x86_64
+#RH7.3
+    - sudo_rh_73: sudo-1.8.6p7-23.el7_3.x86_64.rpm
+    - sudo_rh_73v: sudo-1.8.6p7-23.el7_3.x86_64
+#RH7.4
+    - sudo_rh_74: sudo-1.8.19p2-12.el7_4.x86_64.rpm
+    - sudo_rh_74v: sudo-1.8.19p2-12.el7_4.x86_64
+#RH7.6
+    - sudo_rh_76: sudo-1.8.23-3.el7_6.2.x86_64.rpm
+    - sudo_rh_76v: sudo-1.8.23-3.el7_6.2.x86_64
+
+  tasks:
+  - name: Create directory to store rpm
+    file:
+      path: "{{rpm_dir}}"
+      state: directory
+    tags: dircreate
+
+#####REDHAT6 BLOCK 
+  - name: Setup RH6 servers    
+    block:
+    - name: Copy RPM to RedHat 6 Servers
+      copy:
+        src:  "{{sudo_rh_rpm}}"
+        dest: "{{rpm_dir}}/{{sudo_rh_6}}"
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "6")
+    
+    - name: Register the currently installed version of sudo
+      shell: rpm -qa | grep sudo | grep -v libss
+      register: current_sudo_rpm
+
+    - name: Skip if RH6  packages match
+      fail:
+        msg: skipping
+      failed_when: sudo_rh_6v in current_sudo_rpm.stdout
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "6")
+
+    - name: Install the Package on the RH6 server
+      yum:
+        name: "{{rpm_dir}}/{{sudo_rh_6}}"
+        state: present
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "6")
+    tags:
+      - RedHat6
+
+#####REDHAT7.9 block
+  - name: Setup RH7.9 servers
+    block:
+    - name: Copy RPM to RedHat 7.9 Servers
+      copy:
+        src:  "{{sudo_rh_rpm}}"
+        dest: "{{rpm_dir}}/{{sudo_rh_79}}"
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.9")
+
+    - name: Register the currently installed version of sudo
+      shell: rpm -qa | grep sudo | grep -v libss
+      register: current_sudo_rpm
+
+    - name: Skip if RH7.9  packages match
+      fail:
+        msg: skipping
+      failed_when: sudo_rh_79v in current_sudo_rpm.stdout
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "6")
+
+    - name: Install the Package on the RH6 server
+      yum:
+        name: "{{rpm_dir}}/{{sudo_rh_79}}"
+        state: present
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.9")
+    tags:
+      - RedHat79
+
+
+#####REDHAT7.2 block
+  - name: Setup RH7.2 servers
+    block:
+    - name: Copy RPM to RedHat 7.2 Servers
+      copy:
+        src:  "{{sudo_rh_rpm}}"
+        dest: "{{rpm_dir}}/{{sudo_rh_72}}"
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.2")
+
+    - name: Register the currently installed version of sudo
+      shell: rpm -qa | grep sudo | grep -v libss
+      register: current_sudo_rpm
+
+    - name: Skip if RH7.2  packages match
+      fail:
+        msg: skipping
+      failed_when: sudo_rh_72v in current_sudo_rpm.stdout
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "7.2")
+
+    - name: Install the Package on the RH6 server
+      yum:
+        name: "{{rpm_dir}}/{{sudo_rh_72}}"
+        state: present
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.2")
+    tags:
+      - RedHat72
+
+
+#####REDHAT7.3 block
+  - name: Setup RH7.3 servers
+    block:
+    - name: Copy RPM to RedHat 7.3 Servers
+      copy:
+        src:  "{{sudo_rh_rpm}}"
+        dest: "{{rpm_dir}}/{{sudo_rh_73}}"
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.3")
+
+    - name: Register the currently installed version of sudo
+      shell: rpm -qa | grep sudo | grep -v libss
+      register: current_sudo_rpm
+
+    - name: Skip if RH7.3  packages match
+      fail:
+        msg: skipping
+      failed_when: sudo_rh_73v in current_sudo_rpm.stdout
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "7.3")
+
+    - name: Install the Package on the RH6 server
+      yum:
+        name: "{{rpm_dir}}/{{sudo_rh_73}}"
+        state: present
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.3")
+    tags:
+      - RedHat73
+
+
+
+#####REDHAT7.4 block
+  - name: Setup RH7.4 servers
+    block:
+    - name: Copy RPM to RedHat 7.4 Servers
+      copy:
+        src:  "{{sudo_rh_rpm}}"
+        dest: "{{rpm_dir}}/{{sudo_rh_74}}"
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.4")
+
+    - name: Register the currently installed version of sudo
+      shell: rpm -qa | grep sudo | grep -v libss
+      register: current_sudo_rpm
+
+    - name: Skip if RH7.4  packages match
+      fail:
+        msg: skipping
+      failed_when: sudo_rh_74v in current_sudo_rpm.stdout
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "7.4")
+
+    - name: Install the Package on the RH6 server
+      yum:
+        name: "{{rpm_dir}}/{{sudo_rh_74}}"
+        state: present
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.4")
+    tags:
+      - RedHat74
+
+
+#####REDHAT7.6 block
+  - name: Setup RH7.6 servers
+    block:
+    - name: Copy RPM to RedHat 7.6 Servers
+      copy:
+        src:  "{{sudo_rh_rpm}}"
+        dest: "{{rpm_dir}}/{{sudo_rh_76}}"
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.6")
+
+    - name: Register the currently installed version of sudo
+      shell: rpm -qa | grep sudo | grep -v libss
+      register: current_sudo_rpm
+
+    - name: Skip if RH7.6  packages match
+      fail:
+        msg: skipping
+      failed_when: sudo_rh_76v in current_sudo_rpm.stdout
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_major_version == "7.6")
+
+    - name: Install the Package on the RH6 server
+      yum:
+        name: "{{rpm_dir}}/{{sudo_rh_76}}"
+        state: present
+      when:
+        - (ansible_distribution == "RedHat") and (ansible_distribution_version == "7.6")
+    tags:
+      - RedHat76
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

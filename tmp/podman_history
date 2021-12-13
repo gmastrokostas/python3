@@ -1,0 +1,265 @@
+   21  podman run  -d e76a4b2ed1b4  -v /opt/dbfiles/:/var/lib/mysql:Z -e MYSQL_ROOT_PASSWORD=zxc123 -e MYSQ_DATABASE=testdb -e MYSQL_USER=dbuser MYSQL_PASSWORD=zxc123 
+   22  podman ps
+   23  podman ps -a
+   24  podman logs 6b0204befbea
+   25  podman ps -a
+   26  podman run  -d e76a4b2ed1b4  -v /opt/dbfiles/:/var/lib/mysql:Z -e MYSQL_ROOT_PASSWORD=zxc123 -e MYSQ_DATABASE=testdb -e MYSQL_USER=dbuser MYSQL_PASSWORD=zxc123
+   27  podman ps
+   28  podman ps -a
+   29  podman rm 47a68bd2af34
+   30  podman rm 6b0204befbea
+   31  podman ps
+   32  podman ps -a
+   33  podman run -d p 3308:3306 -v /opt/dbfiles/ -e MYSQL_ROOT_PASSWORD='zxc123' -e MYSQL_USER=user1 -e MYSQL_PASSWORD='zxc123' -e MYSQL_DATABASE=testdb mysql:8
+   34  podman run -d e76a4b2ed1b4 -p 3308:3306 -v /opt/dbfiles/ -e MYSQL_ROOT_PASSWORD='zxc123' -e MYSQL_USER=user1 -e MYSQL_PASSWORD='zxc123' -e MYSQL_DATABASE=testdb mysql:8
+   35  podman ps
+   36  podman ps -a
+   37  podman logs d541195cbbad
+   38  podman run -d e76a4b2ed1b4 p 3308:3306 -v /opt/dbfiles/ -e MYSQL_ROOT_PASSWORD='zxc123' -e MYSQL_USER=user1 -e MYSQL_PASSWORD='zxc123' -e MYSQL_DATABASE=testdb mysql:8
+   39  podman logs d541195cbbad
+   40  podman run -d e76a4b2ed1b4  -v /opt/dbfiles/ -e MYSQL_ROOT_PASSWORD='zxc123' -e MYSQL_USER=user1 -e MYSQL_PASSWORD='zxc123' -e MYSQL_DATABASE=testdb mysql:8
+   41  podman logs 17993d7d01496b81060bb97694ded566a26ef080a612ee43fa3fd45a2519a61d
+   43  podman run -d e76a4b2ed1b4 -e MYSQL_USER=test
+   44  man podman-run
+   45  podman run -d e76a4b2ed1b4 -env  MYSQL_USER=test
+   46  podman run -d e76a4b2ed1b4 -e MYSQL_USER=test -e MYSQL_DATABASE=TESTDB -e MYSQL_ROOT_PASSWORD='zxc123' -e MYSQL_USER=test1
+   47  podman ps -a
+   48  podman ps 
+   49  podman ps -a
+   50  podman logs 819f3486442b
+   51  podman run -d e76a4b2ed1b4 -e=MYSQL_USER=test -e=MYSQL_DATABASE=TESTDB -e=MYSQL_ROOT_PASSWORD='zxc123' -e=MYSQL_USER=test1
+   52  podman ps
+   53  podman logs cf3a82ad0905576280d889760b6ca1661c48ab48b6621d62967b2d2e9ceafe97
+   54  podman run -d e76a4b2ed1b4 e=MYSQL_USER=test -e=MYSQL_DATABASE=TESTDB -e=MYSQL_ROOT_PASSWORD='zxc123' -e=MYSQL_USER=test1
+   55  podman run -d e76a4b2ed1b4 e=MYSQL_USER=test e=MYSQL_DATABASE=TESTDB e=MYSQL_ROOT_PASSWORD='zxc123' e=MYSQL_USER=test1
+   56  podman ps
+   57  podman ps -a
+   58  podman logs e59a441e3d50cf7165e7ab1e269b0cd10c1b3e436992de47e8f33202a41566b3
+   59  podman logs 282c650acd79
+   60  podman logs e59a441e3d50
+   61  podman rm e59a441e3d50 2c2fbfd5c56c cf3a82ad0905 819f3486442b 842ee9687d90 282c650acd79
+   62  podman ps -a
+   63  podman run -d --pod postgresql -e POSTGRES_PASSWORD=password postgres:latest
+   64  podman ps
+   65  podman ps -a
+   66  podman pod create --name postgresql -p 5432 -p 9187
+   67  podman run -d --pod postgresql -e POSTGRES_PASSWORD=password postgres:latest
+   68  podman ps -a
+   69  podman rm 8a88a5c4acc2 33ed6d3a34ff
+   70  podman stop 33ed6d3a34ff
+   71  podman stop 8a88a5c4acc2
+   72  podman ps -a
+   73  podman ps 
+   74  podman rm 8a88a5c4acc2 33ed6d3a34ff
+   75  podman rm 8a88a5c4acc2 33ed6d3a34ff --force
+   76  podman pod 
+   77  podman ps -a
+   78  podman rm 33ed6d3a34ff
+   79  podman pod rm 8651320625b4d58407c4d2f0b2ee2bd059b35c19fe91812d6bd4f2197a8dfd76
+   80  podman pd -a
+   81  podman ps -a
+   82  podman ps 
+   84  podman run -d e76a4b2ed1b4 
+   85  podman run -d e76a4b2ed1b4 -e MYSQL_USER=bob
+   86  podman ps -a
+   87  podman rm 004669d881f0 39991e37f137
+   88  podman ps -a
+   90  podman search registry.redhat.io/rhel8/mariadb
+   91  podman login
+   92  podman search mariadb
+   93  podman images
+   94  podman rmi docker.io/library/mariadb
+   95  podman search mariadb
+   96  podman pull registry.redhat.io/rhel8/mariadb-103
+   97  podman login
+   98  podman pull registry.redhat.io/rhel8/mariadb-103
+   99  podman pull docker.io/library/mariadb
+  100  podman ps -a
+  101  podman rm agitated_bell
+  102  podman ps -a
+  103  podman images
+  104  podman run -d e76a4b2ed1b4
+  105  podman ps -a
+  106  podman run -d c963f2a9a9f1
+  107  podman start  -d c963f2a9a9f1
+  108  podman start   c963f2a9a9f1
+  109  podman ps -a
+  110  podman start   0e40ab26586d
+  111  podman ps -a
+  112  podman rm 0e40ab26586d
+  113  podman ps -a
+  114  podman images
+  115  podman start -d e76a4b2ed1b4
+  116  podman start  e76a4b2ed1b4
+  117  podman run -d e76a4b2ed1b4
+  118  podman ps -a
+  119  podman start 092828f935a6
+  120  podman run -d 092828f935a6 -e MYSQL_ROOT_PASSWORD='zxc123' 
+  121  podman start  -d 092828f935a6 -e MYSQL_ROOT_PASSWORD='zxc123' 
+  122  podman ps -a
+  123  podman rm 092828f935a6 
+  124  podman ps -a
+  125  podman images
+  126  podman run -d 519e12e2a84a
+  127  podman run -d 26b77e58432b
+  128  podman run -d 26056ca25aff
+  129  podman ps-a
+  130  podman ps -a
+  131  podman ps 
+  132  podman stop 6e800f011d1f
+  133  podman ps 
+  134  podman start 6e800f011d1f
+  135  podman ps 
+  136  podman stop 6e800f011d1f
+  137  podman start 6e800f011d1f exec /bin/bash
+  138  podman start 6e800f011d1f exec -it /bin/bash
+  139  podman  6e800f011d1f exec -it /bin/bash
+  140  podman  6e800f011d1f exec -it 6e800f011d1f  /bin/bash 
+  141  man podman-start
+  143  podman images
+  144  podman ps -a
+  145  podman ps 
+  146  podman start 6e800f011d1f
+  147  podman ps -a
+  148  podman ps
+  149  podman stop 6e800f011d1f
+  150  podman ps
+  151  podman ps -a
+  152  podman ps 
+  153  podman run -ti -rm 93f8c5f51b1a
+  154  podman run -titmd  93f8c5f51b1a
+  155  podman -d run 26056ca25aff
+  156  podman  run -d 26056ca25aff
+  157  podman start 776d0916d8ab
+  158  podman images
+  159  podman ps -a
+  160  podman ps 
+  161  podman ps
+  162  podman ps -a
+  163  podman images
+  164  podman ps
+  165  podman stop d67a92721c45 
+  166  podman ps
+  167  podman run  d67a92721c45 
+  168  podman start   d67a92721c45 
+  169  podman ps
+  170  podman run -ti  d67a92721c45 
+  171  podman ps -a
+  172  podman ps 
+  173  podman rm d67a92721c45
+  174  podman ps 
+  175  podman stop d6
+  176  podman ps 
+  177  podman ps -a
+  178  podman rm d67a92721c45 
+  179  podman ps -a
+  180  podman images
+  181  podman ps -a
+  182  podman ps 
+  185  podman images
+  186  podman ps -a
+  187  podman rm 403d60066625 f03d85d0cd20 99939c2ec798
+  195  sudo semanage boolean --list | grep podman
+  200  podman search mariadb
+  204  podman  run -d  -v /opt/dbfiles:/var/lib/mysql:Z -e MYSQL_ROOT_PASSWORD='zxc'     -e  MYSQL_PASSWORD='zxc' -e MYSQL_DATABASE=db1 -e MYSQL_USER=ansible -p 3306:3306  mariadb
+  205  podman ps
+  244  podman ps -a
+  245  podman images
+  246  podman search ubuntu
+  247  podman search docker/suse
+  248  podman search suse
+  249  sudo podman run -d nginx
+  250   podman run -d nginx
+  251  podman list 
+  252  podman images
+  253  podman image
+  254  podman info 388056c9a683
+  255  podman info 
+  257  podman images
+  258  podman run -it nginx
+  259  podman ps
+  260  podman ps -all
+  261  podman ps a
+  262  podman ps -a
+  263  podman run -it busybox
+  264  podman ps
+  265  podman stop 4550280532e4 a1cd0d6a90d6 ef1a246ac659
+  266  podman ps -a
+  267  podman ps 
+  268  podman info
+  269  podman login registry.access.redhat.com 
+  270  podman search
+  271  podman search redhat
+  272  podman search suse
+  276  podman images
+  277  podman inspect docker.io/library/busybox:latest
+  278  podman list
+  279  podman images
+  280  podman inspect 519e12e2a84a
+  281  podman login registry.access.redhat.com 
+  282  podman search registry.access.redhat.com
+  283  podman search registry.redhat.io/ubi8
+  284  podman ps -a
+  285  podman start 4550280532e4
+  286  podman ps -a
+  287  podman ps 
+  288  podman exec 4550280532e4 uname -r
+  289  podman exec 4550280532e4 /bin/bash
+  290  podman exec 4550280532e4 -it /bin/bash
+  291  podman exec -it 4550280532e4 -/bin/bash
+  292  podman exec -it 4550280532e4 /bin/bash
+  293  podman exec -it relaxed_galileo /bin/bash
+  294  podman ps
+  295  podman exec -it relaxed_galileo /bin/bash
+  296  podman ps
+  297  podman stop relaxed_galileo
+  298  podman ps
+  299  podman ps -a
+  300  podman start mydbase1
+  301  podman ps 
+  302  podman exec -it mydbase1 /bin/bash
+  303  podman images
+  304  podman search suse
+  305  podman images
+  306  podman images --all
+  307  podman search
+  308  podman search suse
+  309  podman pull docker.io/mstormo/suse
+  310  podman search ubuntu
+  311  podman ps -a
+  312  podman ps 
+  313  podman exec -it mydbase1 /bin/bash
+  314  podman pull suse
+  315  podman login
+  316  podman search suse
+  317  podman login
+  318  podman images
+  319  podman images -a
+  320  podman -a
+  321  podman ps
+  322  podman ps -a
+  323  podman ps
+  324  podman start keen_greider 
+  325  podman run nginx
+  330  sudo yum install podman
+  337  podman images 
+  338  podman ps -a
+  340  history > podman_commands
+  341  cat podman_commands 
+  342  podman ps -a
+  343  podman stop 03388eb1cd20
+  376  podman ps
+  377  podman  attach keen_greider 
+  378  podman ps
+  379  podman start keen_greider
+  380  podman ps
+  381  podman attach  mydbase1 
+  752  history | grep podman
+  753  podman search  centos6
+  755  podman search  centos6
+  759  history | grep podman
+  760  history | grep podman > podman
+ 1000  history | grep podman
+ 1018  rpm -qa | grep podman
+ 1019  history | grep podman > podman history
+ 1020  history | grep podman > podman_history
