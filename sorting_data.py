@@ -21,4 +21,26 @@ for items in list_1:
 with open("info", "r") as r:
     for line in sorted(r):
         print(line)
+##############################
+#Populate a list and print specific items
+f_open=open("info", "r")
+list_1=[]
+
+for i in f_open:
+    list_1.append(i)
+list_1.sort()
+for items in list_1:
+    #print(items)
+    print((items.split(" ")[0]), (items.split(" ")[2]))
+
+###############################
+#assing each tuple item to a varible
+#split a tuple
+var1="one"
+var2="two"
+var3="three"
+var4="four"
+var5="five"
+full=(var1, var2, var3, var4, var5)
+x=("|").split(full)
 
