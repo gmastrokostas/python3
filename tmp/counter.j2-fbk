@@ -1,8 +1,0 @@
-{% set count = namespace(value=2) %}
-
-{% for i in 'loop_number' %}
-192.168.1.{% set count.value = count.value + 1 %}
-{{count.value}}
-{% endfor %}
-
-
