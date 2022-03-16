@@ -1,9 +1,6 @@
 #What is the difference between an update method and a just replacing a value from a dictionary.
 
 #What is the difference between removing a dictionary item like this:   dictionary.pop("item_1")  vs del.dictionary["item_1"]
-
-
-
 dictionary = {
         "item_1"  : "ferrari",
         "facts"  : True,
