@@ -1,0 +1,68 @@
+#REad this https://www.adamsmith.haus/python/answers/how-to-create-a-new-instance-of-a-class-in-python
+import socket
+import platform
+import psutil
+import datetime
+import os
+class get_info():
+    def __init__(self):
+        self.hostname   = socket.gethostname()
+        self.pltfrm     = platform.platform()
+        self.kernel     = platform.release()
+        self.vrs        = platform.version()
+        self.cores      = psutil.cpu_count()
+        self.load       = psutil.getloadavg()
+        self.rawboot    = psutil.boot_time()
+        self.rootspace  = psutil.disk_usage('/')
+        self.vmem       = psutil.virtual_memory()
+        self.swap       = psutil.swap_memory()
+        self.upt        = os.system('uptime | cut -d " " -f 4,5')
+
+    def last_reboot(self):
+        reboot_time = psutil.boot_time()
+        l_reboot = datetime.datetime.fromtimestamp(reboot_time)
+        return l_reboot
+    def sys_load(self):
+        av_load = " - ".join(map(str, info.load))
+        return av_load
+
+    def memory_info(self):
+        total_ram_memory_raw = info.vmem[0]
+        left_ram_memory_raw  = info.vmem[1]
+        used_ram_memory_raw  = info.vmem[3]
+        percent_ram_used = info.vmem[2]
+        #--
+        total_ram_memory = total_ram_memory_raw  / 1024 / 1024 / 1024
+        left_ram_memory  = left_ram_memory_raw   / 1024 / 1024 / 1024
+        used_ram_memory  = used_ram_memory_raw   / 1024 / 1024 / 1024
+        return [total_ram_memory, total_ram_memory, used_ram_memory, percent_ram_used]
+
+    def root_space(self):
+        total_raw = info.rootspace[0]
+        used_raw  = info.rootspace[1]
+        left_raw  = info.rootspace[2]
+        total_g   = total_raw / 1024 / 1024 / 1024
+        used_g    = used_raw  / 1024 / 1024 / 1024
+        left_g    = left_raw  / 1024 / 1024 / 1024
+
+        return [total_g, used_g, left_g]
+
+info = get_info()
+
+
+print("--------------")
+print("SYSTEM INFO")
+print("--------------")
+print("hostname:", info.hostname)
+print("Operating-System:", info.pltfrm)
+print("Kernel:", info.kernel)
+print("Num Cores:", info.cores)
+print("RAM Total:", info.memory_info()[0])
+print("RAM Used:", info.memory_info()[2])
+print("Ram Used in %:", info.memory_info()[3])
+print("CPU Load average:", info.sys_load())
+print("Last_boot:", info.last_reboot())
+print("/ Total:", info.root_space()[0])
+print("/ Used:", info.root_space()[1])
+print("/ Avail:", info.root_space()[2])
+
